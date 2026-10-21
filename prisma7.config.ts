@@ -1,6 +1,4 @@
 import "dotenv/config";
-import { join } from "node:path";
-import { pathToFileURL } from "node:url";
 import { defineConfig } from "prisma/config";
 
 export default defineConfig({
@@ -9,6 +7,6 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: pathToFileURL(join(process.cwd(), "data", "reds.db")).href,
+    url: process.env.DATABASE_URL,
   },
 });
