@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { localDb } from "@/lib/local-db";
 import { DUMMY_HASH, setSessionCookie, verifyPassword } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_BODY_BYTES = 10_000;
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
   if (password.length > 128) return NextResponse.json({ error: "Password is too long" }, { status: 400 });
 
   try {
-    const user = localDb.prepare("SELECT id, email, name, role, password FROM users WHERE email = ?").get(email) as { id: string; email: string; name: string; role: string; password: string } | undefined;
+    const user = await prisma.user.findUnique({ where: { email }, select: { id: true, email: true, name: true, role: true, password: true } });
     const ok = await verifyPassword(password, user?.password ?? DUMMY_HASH);
 
     // Keep this message generic so attackers cannot tell whether the email
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
     await setSessionCookie(user.id);
     return NextResponse.json({ id: user.id, email: user.email, name: user.name, role: user.role });
   } catch (error) {
-    // Handles a disconnected database, locked SQLite file, or other service failure.
+    // Handles a disconnected database or other service failure.
     // Do not expose the database error to the browser.
     console.error("Sign-in service error:", error);
     return NextResponse.json({ error: "Sign-in is temporarily unavailable. Please try again." }, { status: 503 });
