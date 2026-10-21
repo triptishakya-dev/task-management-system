@@ -1,6 +1,6 @@
 # REDS Orbital Command Center
 
-Mission-control workspace built with Next.js, SQLite, and Prisma. It includes a protected admin area, a task board, user administration, and local authentication.
+Mission-control workspace built with Next.js, PostgreSQL, and Prisma. It includes a protected admin area, a task board, user administration, and local authentication.
 
 ## Requirements
 
@@ -73,7 +73,7 @@ Unauthenticated page requests redirect to `/signin`. Protected API requests retu
 
 ## Database and Prisma Studio
 
-The app stores its local SQLite data in `data/reds.db`. The file is created automatically and is ignored by Git.
+The app uses the PostgreSQL database configured in `DATABASE_URL`. This must be set in `.env` for local development and in your deployment provider's environment settings for production.
 
 To inspect it with Prisma Studio:
 
@@ -81,7 +81,7 @@ To inspect it with Prisma Studio:
 npx prisma studio
 ```
 
-Prisma Studio opens at [http://localhost:5555](http://localhost:5555) by default. The Prisma configuration generates a compatible `file:///` SQLite URL for Studio.
+Prisma Studio opens at [http://localhost:5555](http://localhost:5555) by default.
 
 ## Commands
 
