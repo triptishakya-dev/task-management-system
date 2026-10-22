@@ -200,7 +200,7 @@ export default function Dashboard() {
   }, [activePlanetName, focused]);
 
   return (
-    <div style={{ position: 'fixed', inset: 0, display: 'grid', gridTemplateRows: '56px minmax(0,1fr) 58px', gridTemplateColumns: 'minmax(0,1fr)', overflow: 'hidden', backgroundColor: '#231F20', color: '#F6F6F3' }}>
+    <div className="dashboard-shell" style={{ position: 'fixed', inset: 0, display: 'grid', gridTemplateRows: '56px minmax(0,1fr) 58px', gridTemplateColumns: 'minmax(0,1fr)', overflow: 'hidden', backgroundColor: '#231F20', color: '#F6F6F3' }}>
       
       {/* Background Canvases */}
       <canvas ref={bgRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block', pointerEvents: 'none' }}></canvas>
@@ -208,7 +208,7 @@ export default function Dashboard() {
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 44% at 50% 52%, rgba(79,70,229,.13), transparent 70%), radial-gradient(circle at 8% 88%, rgba(11,135,147,.10), transparent 55%), radial-gradient(circle at 96% 10%, rgba(31,191,138,.07), transparent 50%)' }}></div>
 
       {/* Header */}
-      <header style={{ position: 'relative', zIndex: 5, display: 'grid', gridTemplateColumns: 'minmax(0,1fr) auto minmax(0,1fr)', alignItems: 'center', padding: '0 18px', gap: '14px', borderBottom: '1px solid rgba(99,91,255,.13)', background: 'linear-gradient(180deg, rgba(35,31,32,.72), rgba(35,31,32,.35))', backdropFilter: 'blur(18px)' }}>
+      <header className="dashboard-header" style={{ position: 'relative', zIndex: 5, display: 'grid', gridTemplateColumns: 'minmax(0,1fr) auto minmax(0,1fr)', alignItems: 'center', padding: '0 18px', gap: '14px', borderBottom: '1px solid rgba(99,91,255,.13)', background: 'linear-gradient(180deg, rgba(35,31,32,.72), rgba(35,31,32,.35))', backdropFilter: 'blur(18px)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           <div style={{ position: 'relative', width: '26px', height: '26px', display: 'grid', placeItems: 'center' }}>
             <div style={{ position: 'absolute', inset: 0, border: '1px solid rgba(99,91,255,.5)', borderRadius: '50%', animation: 'om-spin 14s linear infinite', borderTopColor: 'transparent', borderLeftColor: 'rgba(99,91,255,.15)' }}></div>
@@ -219,7 +219,7 @@ export default function Dashboard() {
             <div style={{ fontFamily: 'var(--font-body), sans-serif', fontSize: '9px', letterSpacing: '.22em', color: 'rgba(59,130,246,.5)', whiteSpace: 'nowrap' }}>SOL SYSTEM // LIVE · CELESTIAL NAVIGATION</div>
           </div>
         </div>
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '2px', fontFamily: 'var(--font-body), sans-serif', fontSize: '10.5px', letterSpacing: '.2em' }}>
+        <nav className="dashboard-nav" style={{ display: 'flex', alignItems: 'center', gap: '2px', fontFamily: 'var(--font-body), sans-serif', fontSize: '10.5px', letterSpacing: '.2em' }}>
           <div style={{ padding: '7px 11px', color: '#231F20', background: 'linear-gradient(180deg, rgba(59,130,246,.95), rgba(79,70,229,.8))', borderRadius: '2px', boxShadow: '0 0 18px rgba(99,91,255,.35)' }}>SYSTEM OVERVIEW</div>
           <div style={{ width: '1px', height: '14px', background: 'rgba(99,91,255,.2)' }}></div>
           {['PLANETS', 'MISSIONS', 'SIGNALS', 'ANALYTICS'].map(item => (
@@ -247,10 +247,10 @@ export default function Dashboard() {
       </header>
 
       {/* Main Content */}
-      <main style={{ position: 'relative', zIndex: 4, display: 'grid', gridTemplateColumns: 'minmax(205px,285px) minmax(0,1fr) minmax(220px,315px)', gap: '16px', padding: '14px 18px', minWidth: 0, minHeight: 0 }}>
+      <main className="dashboard-main" style={{ position: 'relative', zIndex: 4, display: 'grid', gridTemplateColumns: 'minmax(205px,285px) minmax(0,1fr) minmax(220px,315px)', gap: '16px', padding: '14px 18px', minWidth: 0, minHeight: 0 }}>
         
         {/* Left Section */}
-        <section style={{ display: 'flex', flexDirection: 'column', gap: '14px', overflow: 'auto', paddingRight: '3px' }}>
+        <section className="dashboard-left" style={{ display: 'flex', flexDirection: 'column', gap: '14px', overflow: 'auto', paddingRight: '3px' }}>
           
           <div className="hover:border-[rgba(59,130,246,.4)] hover:shadow-[inset_0_1px_0_rgba(196,181,253,.16),_inset_0_0_50px_rgba(79,70,229,.2),_0_18px_46px_rgba(0,0,0,.5)]" style={{ position: 'relative', overflow: 'hidden', border: '1px solid rgba(99,91,255,.15)', borderRadius: '3px', background: 'rgba(41,41,41,.45)', backdropFilter: 'blur(18px)', boxShadow: 'inset 0 1px 0 rgba(196,181,253,.08), inset 0 0 40px rgba(79,70,229,.12), 0 18px 40px rgba(0,0,0,.4)', padding: '14px 16px 16px', transition: 'border-color .5s ease, box-shadow .5s ease', flex: 'none' }}>
             <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '34px', background: 'linear-gradient(180deg, rgba(59,130,246,.16), transparent)', pointerEvents: 'none', animation: 'om-panel-scan 9s ease-in-out infinite' }}></div>
@@ -341,7 +341,7 @@ export default function Dashboard() {
         </section>
 
         {/* Center Canvas */}
-        <section style={{ position: 'relative', minHeight: 0, minWidth: 0 }}>
+        <section className="dashboard-visualizer" style={{ position: 'relative', minHeight: 0, minWidth: 0 }}>
           
           {/* Custom Web Component from public/solar-system.js */}
           <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
@@ -395,7 +395,7 @@ export default function Dashboard() {
         </section>
 
         {/* Right Section */}
-        <section style={{ display: 'flex', flexDirection: 'column', gap: '14px', overflow: 'auto', paddingRight: '3px' }}>
+        <section className="dashboard-right" style={{ display: 'flex', flexDirection: 'column', gap: '14px', overflow: 'auto', paddingRight: '3px' }}>
           
           <div className="hover:border-[rgba(59,130,246,.35)]" style={{ position: 'relative', overflow: 'hidden', border: '1px solid rgba(99,91,255,.15)', borderRadius: '3px', background: 'rgba(41,41,41,.45)', backdropFilter: 'blur(18px)', boxShadow: 'inset 0 1px 0 rgba(196,181,253,.08), 0 18px 40px rgba(0,0,0,.4)', padding: '14px 16px 16px', transition: 'border-color .5s ease', flex: 'none' }}>
             <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '30px', background: 'linear-gradient(180deg, rgba(59,130,246,.13), transparent)', pointerEvents: 'none', animation: 'om-panel-scan 13s ease-in-out infinite' }}></div>
@@ -468,7 +468,7 @@ export default function Dashboard() {
       </main>
 
       {/* Footer */}
-      <footer style={{ position: 'relative', zIndex: 5, display: 'flex', alignItems: 'center', gap: '22px', padding: '0 20px', borderTop: '1px solid rgba(99,91,255,.13)', background: 'linear-gradient(0deg, rgba(35,31,32,.75), rgba(35,31,32,.3))', backdropFilter: 'blur(18px)', fontFamily: 'var(--font-body), sans-serif' }}>
+      <footer className="dashboard-footer" style={{ position: 'relative', zIndex: 5, display: 'flex', alignItems: 'center', gap: '22px', padding: '0 20px', borderTop: '1px solid rgba(99,91,255,.13)', background: 'linear-gradient(0deg, rgba(35,31,32,.75), rgba(35,31,32,.3))', backdropFilter: 'blur(18px)', fontFamily: 'var(--font-body), sans-serif' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
           <div style={{ fontSize: '8.5px', letterSpacing: '.22em', color: 'rgba(246,246,243,.38)' }}>CURRENT COORDINATES</div>
           <div style={{ fontSize: '12px', letterSpacing: '.1em', color: '#F6F6F3', whiteSpace: 'nowrap' }}>RA 14H 39M · DEC -60° 50'</div>
