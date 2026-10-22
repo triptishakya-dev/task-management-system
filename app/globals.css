@@ -70,6 +70,41 @@ a:hover { color:#4F46E5; }
 @keyframes om-fade-up { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform:none; } }
 @keyframes om-bracket { 0% { opacity:0; transform: scale(1.18); } 100% { opacity:.85; transform: scale(1); } }
 
+/* Homepage-only responsive layout. Desktop properties remain in the component;
+   these rules engage only when there is not enough room for the three-panel HUD. */
+@media (max-width: 1023px) {
+  body:has(.dashboard-shell) { overflow: auto; }
+  .dashboard-shell { position: relative !important; inset: auto !important; width: 100%; min-height: 100dvh; height: auto; grid-template-rows: 56px auto auto !important; overflow: visible !important; }
+  .dashboard-main { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; grid-template-rows: minmax(390px, 54vw) auto; align-items: start; }
+  .dashboard-visualizer { grid-column: 1 / -1; grid-row: 1; align-self: stretch; height: 100%; min-height: min(54vw, 540px); }
+  .dashboard-left { grid-column: 1; grid-row: 2; overflow: visible !important; padding-right: 0 !important; }
+  .dashboard-right { grid-column: 2; grid-row: 2; overflow: visible !important; padding-right: 0 !important; }
+  .dashboard-footer { min-height: 58px; flex-wrap: wrap; padding-block: 12px !important; }
+  .dashboard-footer > div:last-child { margin-left: 0 !important; }
+}
+
+@media (max-width: 767px) {
+  .dashboard-shell { grid-template-rows: auto auto auto !important; }
+  .dashboard-header { display: flex !important; flex-wrap: wrap; min-height: 56px; height: auto; padding: 10px 12px !important; gap: 10px !important; }
+  .dashboard-header > div:first-child { flex: 1 1 auto; min-width: 0; }
+  .dashboard-header > div:last-child { margin-left: auto; flex: 0 0 auto; }
+  .dashboard-nav { order: 3; flex: 1 0 100%; overflow-x: auto; padding-bottom: 2px; scrollbar-width: thin; }
+  .dashboard-main { grid-template-columns: minmax(0, 1fr) !important; grid-template-rows: minmax(300px, 78vw) auto auto; gap: 12px !important; padding: 12px !important; }
+  .dashboard-visualizer { grid-column: 1; grid-row: 1; align-self: stretch; height: 100%; min-height: 300px; max-height: 440px; }
+  .dashboard-left { grid-column: 1; grid-row: 2; }
+  .dashboard-right { grid-column: 1; grid-row: 3; }
+  .dashboard-footer { align-items: flex-start !important; gap: 14px !important; padding: 14px 12px 18px !important; }
+  .dashboard-footer > div[style*="width: 1px"] { display: none !important; }
+  .dashboard-footer > div:last-child { width: 100%; flex-wrap: wrap; gap: 10px !important; }
+}
+
+@media (max-width: 390px) {
+  .dashboard-header { padding-inline: 9px !important; }
+  .dashboard-main { padding: 9px !important; }
+  .dashboard-visualizer { min-height: 290px; }
+  .dashboard-footer { gap: 11px !important; padding-inline: 9px !important; }
+}
+
 /* Responsive behavior shared by every administration route and the task board. */
 .admin-card{min-width:0}.admin-table{min-width:560px}.admin-card:has(.admin-table){overflow-x:auto}
 @media(max-width:1180px){.admin-grid.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-content{padding:30px}.admin-sidebar{width:220px}.admin-main{margin-left:220px}}
